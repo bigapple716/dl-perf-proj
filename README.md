@@ -4,6 +4,11 @@ Deep Learning Performance Final Project
 
 Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 
+## TO DO
+- [ ] How to evaluate models?
+- [ ] How to train teacher model?
+- [ ] How to distill student model?
+
 ## Dataset Analysis
 
 - Dataset: WikiText-103
