@@ -8,6 +8,7 @@ Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 - [ ] How to evaluate models?
 - [ ] How to train teacher model?
 - [ ] How to distill student model?
+- [ ] How to add LayerDrop during teacher's training?
 
 ## Dataset Analysis
 
