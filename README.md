@@ -24,6 +24,10 @@ Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 - Transformers Doc: https://huggingface.co/docs/transformers/index
 - Hugging Face supports PyTorch & Tensorflow. We use the Tensorflow version, because it runs much faster on Apple M1 Chip.
 
-#### Models
+#### Model Hub
 - All models: https://huggingface.co/models
 - distilbert: https://huggingface.co/distilbert-base-uncased
+
+#### Dataset Hub
+- All datasets: https://huggingface.co/datasets
+- wikitext: https://huggingface.co/datasets/wikitext
