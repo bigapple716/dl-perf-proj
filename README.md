@@ -6,6 +6,7 @@ Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 
 ## TO DO
 - [ ] How to evaluate models?
+- [ ] 如何把dataset转化成tf.dataset, 送进模型里去训练
 - [ ] How to train teacher model?
 - [ ] How to distill student model?
 - [ ] How to add LayerDrop during teacher's training?
