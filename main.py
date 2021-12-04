@@ -1,9 +1,16 @@
-from transformers import DistilBertTokenizer, TFDistilBertModel
+from transformers import BertConfig
+from transformers import BertTokenizer, TFBertForMaskedLM
 
-tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
-model = TFDistilBertModel.from_pretrained("distilbert-base-uncased")
-text = "I love deep learning."
-encoded_input = tokenizer(text, return_tensors='tf')
-output = model(encoded_input)
+# Initializing a BERT bert-base-uncased style configuration
+configuration = BertConfig()
 
-print(output)
+# Initializing a model from the bert-base-uncased style configuration
+teacher = TFBertForMaskedLM(configuration)
+
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+
+inputs = tokenizer("The capital of France is [MASK].", return_tensors="tf")
+inputs["labels"] = tokenizer("The capital of France is Paris.", return_tensors="tf")["input_ids"]
+
+teacher.compile()
+teacher.fit()

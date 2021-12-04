@@ -31,3 +31,9 @@ Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 #### Dataset Hub
 - All datasets: https://huggingface.co/datasets
 - wikitext: https://huggingface.co/datasets/wikitext
+
+### Tokenizers
+We don't re-train tokenizers. Instead, we use the one that comes with BERT and DistilBERT.
+
+### Pre-training the teacher
+- For pre-training, we don't use Next Sentence Prediction, just Masked Language Model.
