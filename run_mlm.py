@@ -281,7 +281,9 @@ def main():
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
+    # TODO change hyper parameters
     training_args.num_train_epochs = 1
+    training_args.per_device_train_batch_size = 16
 
     # Sanity checks
     if data_args.dataset_name is None and data_args.train_file is None and data_args.validation_file is None:
@@ -527,10 +529,13 @@ def main():
             model = TFAutoModelForMaskedLM.from_pretrained(model_args.model_name_or_path, config=config)
         else:
             logger.info("Training new model from scratch")
+
+            # TODO change config
             config.num_hidden_layers = 4
             config.num_attention_heads = 4
             config.hidden_size = 32
             print(config)
+
             model = TFAutoModelForMaskedLM.from_config(config)
 
         model.resize_token_embeddings(len(tokenizer))
