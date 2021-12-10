@@ -1,16 +1,23 @@
 from transformers import BertConfig
-from transformers import BertTokenizer, TFBertForMaskedLM
+from transformers import TFBertForMaskedLM
+import data_preprocess
+import tensorflow as tf
+
+tf_train_dataset, tf_validation_dataset, tf_test_dataset = data_preprocess.preprocess(use_small_dataset=True)
 
 # Initializing a BERT bert-base-uncased style configuration
 configuration = BertConfig()
+print('BERT config:', configuration)
 
 # Initializing a model from the bert-base-uncased style configuration
 teacher = TFBertForMaskedLM(configuration)
 
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+teacher.compile(optimizer=tf.keras.optimizers.Adam(),
+                loss=tf.keras.losses.BinaryCrossentropy(),
+                metrics=[])
 
-inputs = tokenizer("The capital of France is [MASK].", return_tensors="tf")
-inputs["labels"] = tokenizer("The capital of France is Paris.", return_tensors="tf")["input_ids"]
-
-teacher.compile()
-teacher.fit()
+history = teacher.fit(
+    tf_train_dataset,
+    validation_data=tf_validation_dataset,
+    epochs=1
+)
