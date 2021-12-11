@@ -37,7 +37,14 @@ We don't re-train tokenizers. Instead, we use the one that comes with BERT and D
 - For pre-training, we don't use Next Sentence Prediction, just Masked Language Model.
 
 ```shell
-python run_mlm.py --tokenizer_name bert-base-uncased --model_type bert --output_dir output --dataset_name wikitext --dataset_config_name wikitext-2-raw-v1  
+python run_mlm_pt.py \
+    --tokenizer_name bert-base-uncased \
+    --model_type bert \
+    --output_dir output \
+    --dataset_name wikitext \
+    --dataset_config_name wikitext-2-raw-v1 \
+    --do_train \
+    --do_eval
 ```
 
 ## Distil the student
