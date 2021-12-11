@@ -19,7 +19,7 @@ Supported architectures include: BERT -> DistilBERT, RoBERTa -> DistilRoBERTa, G
 import argparse
 import json
 import os
-import pickle
+import pickle5 as pickle
 import shutil
 
 import numpy as np
