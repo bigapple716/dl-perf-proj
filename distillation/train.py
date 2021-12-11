@@ -291,6 +291,7 @@ def main():
     logger.info("Student loaded.")
 
     # TEACHER #
+    # TODO supports loading teacher model from PyTorch model
     teacher = teacher_model_class.from_pretrained(args.teacher_name, output_hidden_states=True)
     if args.n_gpu > 0:
         teacher.to(f"cuda:{args.local_rank}")
