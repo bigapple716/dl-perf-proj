@@ -43,7 +43,11 @@ python run_mlm_pt.py \
     --dataset_name wikitext \
     --dataset_config_name wikitext-2-raw-v1 \
     --do_train \
-    --do_eval
+    --do_eval \
+    --per_device_train_batch_size 16 \
+    --per_device_eval_batch_size 16 \
+    --num_train_epochs 1 
+    
 ```
 
 ## Distil the student

@@ -213,9 +213,7 @@ def main():
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
-    # TODO change training_args
-    training_args.num_train_epochs = 1
-    training_args.per_device_train_batch_size = 16
+    # You can change training_args here
 
     # Setup logging
     logging.basicConfig(
@@ -371,8 +369,8 @@ def main():
         # TODO change config
         config.num_hidden_layers = 4
         config.num_attention_heads = 4
-        config.hidden_size = 32
-        config.layerdrop = 0.2
+        # config.hidden_size = 32
+        config.layerdrop = 0
 
         # model = AutoModelForMaskedLM.from_config(config)
         model = BertForMaskedLM(config)  # I hard-coded the model type. Above is the original code
