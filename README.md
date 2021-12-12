@@ -40,6 +40,7 @@ python run_mlm_pt.py \
     --tokenizer_name bert-base-uncased \
     --model_type bert \
     --output_dir output \
+    --overwrite_output_dir \
     --dataset_name wikitext \
     --dataset_config_name wikitext-2-raw-v1 \
     --do_train \
@@ -47,7 +48,6 @@ python run_mlm_pt.py \
     --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
     --num_train_epochs 1 
-    
 ```
 
 ## Distil the student

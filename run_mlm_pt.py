@@ -370,7 +370,7 @@ def main():
         config.num_hidden_layers = 4
         config.num_attention_heads = 4
         # config.hidden_size = 32
-        config.layerdrop = 0
+        config.layerdrop = 0.2
 
         # model = AutoModelForMaskedLM.from_config(config)
         model = BertForMaskedLM(config)  # I hard-coded the model type. Above is the original code
