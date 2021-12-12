@@ -2,13 +2,10 @@ from datasets import load_dataset
 
 
 def preprocess(use_small_dataset=True):
-    wiki_small = load_dataset("wikitext", "wikitext-2-raw-v1")
-    wiki_large = load_dataset("wikitext", "wikitext-103-raw-v1")
-
     if use_small_dataset:
-        raw_datasets = wiki_small
+        raw_datasets = load_dataset("wikitext", "wikitext-2-raw-v1")
     else:
-        raw_datasets = wiki_large
+        raw_datasets = load_dataset("wikitext", "wikitext-103-raw-v1")
 
     # print dataset info
     print('Dataset Info:')
