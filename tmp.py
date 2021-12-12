@@ -2,6 +2,7 @@ import time
 
 from transformers import DistilBertTokenizer, TFDistilBertModel
 from transformers import pipeline
+import torch
 
 text = "I love deep learning."
 tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
@@ -29,3 +30,5 @@ inputs["labels"] = tokenizer("The capital of France is Paris.", return_tensors="
 outputs = model(inputs)
 loss = outputs.loss
 logits = outputs.logits
+
+print(torch.empty(5).uniform_())
