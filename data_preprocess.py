@@ -1,14 +1,4 @@
 from datasets import load_dataset
-from transformers import AutoTokenizer
-
-# hyper parameters
-BATCH_SIZE = 8
-
-tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-
-
-def tokenize_function(example):
-    return tokenizer(example['text'], max_length=512, padding='max_length', truncation=True)
 
 
 def preprocess(use_small_dataset=True):
@@ -27,7 +17,7 @@ def preprocess(use_small_dataset=True):
     print('Example:', raw_datasets['train'][4])
     print()
 
-    with open('dump.txt', 'w') as f_out:
+    with open('distillation/data/dump.txt', 'w') as f_out:
         for row in raw_datasets['train']:
             f_out.write(row['text'])
 
