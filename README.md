@@ -52,7 +52,7 @@ python run_mlm_pt.py \
 cd ./distillation
 python scripts/binarized_data.py --file_path data/dump.txt --tokenizer_type bert --tokenizer_name bert-base-uncased --dump_file data/binarized_text
 
-python scripts/token_counts.py --data_file data/binarized_text.bert-base-uncased.pickle --token_counts_dump data/token_counts.bert-base-uncased.pickle --vocab_size 30522
+python scripts/token_counts.py --data_file data/binarized_text.bert-base-uncased.pickle --token_counts_dump data/token_counts.bert-base-uncased.pickle
 
 python train.py \
     --student_type distilbert \
@@ -64,5 +64,5 @@ python train.py \
     --dump_path serialization_dir/my_first_training \
     --data_file data/binarized_text.bert-base-uncased.pickle \
     --token_counts data/token_counts.bert-base-uncased.pickle \
-    --force --n_epoch 1 --n_gpu 0
+    --force --n_epoch 1
 ```
