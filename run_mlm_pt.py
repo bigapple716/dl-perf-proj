@@ -32,8 +32,8 @@ from typing import Optional
 import datasets
 from datasets import load_dataset
 
-import transformers
-from transformers import (
+import local_transformers.src.transformers as transformers
+from local_transformers.src.transformers import (
     CONFIG_MAPPING,
     MODEL_FOR_MASKED_LM_MAPPING,
     AutoConfig,
@@ -45,9 +45,9 @@ from transformers import (
     TrainingArguments,
     set_seed,
 )
-from transformers.trainer_utils import get_last_checkpoint
-from transformers.utils import check_min_version
-from transformers.utils.versions import require_version
+from local_transformers.src.transformers.trainer_utils import get_last_checkpoint
+from local_transformers.src.transformers.utils import check_min_version
+from local_transformers.src.transformers.utils.versions import require_version
 
 
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
