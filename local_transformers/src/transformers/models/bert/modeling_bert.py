@@ -27,7 +27,7 @@ import torch.utils.checkpoint
 from packaging import version
 from torch import nn
 from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss
-
+from .layer_drop import LayerDropModuleList
 from ...activations import ACT2FN
 from ...file_utils import (
     ModelOutput,
@@ -531,7 +531,15 @@ class BertEncoder(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.config = config
-        self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
+
+        # self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
+
+        # I implement layerdrop here. Above is the original code
+        print('============= Layer Drop =============')
+        logger.error('Applying layer drop of %.2f'.format(self.config.layerdrop))
+        self.layer = LayerDropModuleList(p=self.config.layerdrop,
+                                         modules=[BertLayer(config) for _ in range(config.num_hidden_layers)])
+
         self.gradient_checkpointing = False
 
     def forward(

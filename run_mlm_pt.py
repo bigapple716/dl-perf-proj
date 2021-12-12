@@ -38,6 +38,8 @@ from local_transformers.src.transformers import (
     MODEL_FOR_MASKED_LM_MAPPING,
     AutoConfig,
     AutoModelForMaskedLM,
+    BertForMaskedLM,
+    BertConfig,
     AutoTokenizer,
     DataCollatorForLanguageModeling,
     HfArgumentParser,
@@ -327,7 +329,11 @@ def main():
     elif model_args.model_name_or_path:
         config = AutoConfig.from_pretrained(model_args.model_name_or_path, **config_kwargs)
     else:
-        config = CONFIG_MAPPING[model_args.model_type]()
+        # config = CONFIG_MAPPING[model_args.model_type]()
+
+        # I hard-coded the config type to adapt to local transformers' repo. Above is the original code.
+        config = BertConfig()
+
         logger.warning("You are instantiating a new config instance from scratch.")
         if model_args.config_overrides is not None:
             logger.info(f"Overriding config: {model_args.config_overrides}")
@@ -366,9 +372,10 @@ def main():
         config.num_hidden_layers = 4
         config.num_attention_heads = 4
         config.hidden_size = 32
-        print(config)
+        config.layerdrop = 0.2
 
-        model = AutoModelForMaskedLM.from_config(config)
+        # model = AutoModelForMaskedLM.from_config(config)
+        model = BertForMaskedLM(config)  # I hard-coded the model type. Above is the original code
 
     model.resize_token_embeddings(len(tokenizer))
 
