@@ -6,7 +6,6 @@ Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 
 ## TO DO
 - [ ] How to evaluate models?
-- [ ] How to add LayerDrop during teacher's training?
 
 ## Dataset Analysis
 
