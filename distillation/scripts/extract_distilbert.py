@@ -48,7 +48,7 @@ if __name__ == "__main__":
         compressed_sd[f"distilbert.embeddings.LayerNorm.{w}"] = state_dict[f"{prefix}.embeddings.LayerNorm.{w}"]
 
     std_idx = 0
-    for teacher_idx in [0, 2, 4, 7, 9, 11]:
+    for teacher_idx in [0, 2]:  # Originally the range was in [0, 11]
         for w in ["weight", "bias"]:
             compressed_sd[f"distilbert.transformer.layer.{std_idx}.attention.q_lin.{w}"] = state_dict[
                 f"{prefix}.encoder.layer.{teacher_idx}.attention.self.query.{w}"
