@@ -4,9 +4,6 @@ Deep Learning Performance Final Project
 
 Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 
-## TO DO
-- [ ] How to evaluate models?
-
 ## Dataset Analysis
 
 - Dataset: WikiText-103
