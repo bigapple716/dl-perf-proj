@@ -58,15 +58,21 @@ python scripts/binarized_data.py --file_path data/dump.txt --tokenizer_type bert
 
 python scripts/token_counts.py --data_file data/binarized_text.bert-base-uncased.pickle --token_counts_dump data/token_counts.bert-base-uncased.pickle
 
+python scripts/extract_distilbert.py \
+    --model_name ../Models/5/ \
+    --dump_checkpoint ../Models/student_5.pth
+
 python train.py \
     --student_type distilbert \
     --student_config training_configs/distilbert-mini-uncased.json \
+    --student_pretrained_weights ../Models/student_5.pth \
     --teacher_type bert \
     --teacher_name bert-base-uncased \
+    --teacher_loc ../Models/5/ \
     --alpha_ce 5.0 --alpha_mlm 2.0 --alpha_cos 1.0 --alpha_clm 0.0 --mlm \
     --freeze_pos_embs \
-    --dump_path serialization_dir/my_first_training \
+    --dump_path ../Models/student_5_after_distil/ \
     --data_file data/binarized_text.bert-base-uncased.pickle \
     --token_counts data/token_counts.bert-base-uncased.pickle \
-    --force --n_epoch 1
+    --force --n_epoch 1 --batch_size 32 --n_gpu 0
 ```

@@ -216,6 +216,10 @@ def main():
 
     parser.add_argument("--log_interval", type=int, default=500, help="Tensorboard logging interval.")
     parser.add_argument("--checkpoint_interval", type=int, default=4000, help="Checkpoint interval.")
+
+    # teacher model location
+    parser.add_argument("--teacher_loc", type=str, help="Location of teacher model")
+
     args = parser.parse_args()
     sanity_checks(args)
 
@@ -291,8 +295,11 @@ def main():
     logger.info("Student loaded.")
 
     # TEACHER #
-    # TODO supports loading teacher model from PyTorch model
-    teacher = teacher_model_class.from_pretrained(args.teacher_name, output_hidden_states=True)
+    # teacher = teacher_model_class.from_pretrained(args.teacher_name, output_hidden_states=True)
+
+    # loads teacher model from local PyTorch model directory. Original code is above.
+    teacher = BertForMaskedLM.from_pretrained(args.teacher_loc, output_hidden_states=True)
+
     if args.n_gpu > 0:
         teacher.to(f"cuda:{args.local_rank}")
     logger.info(f"Teacher loaded from {args.teacher_name}.")
