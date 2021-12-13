@@ -7,7 +7,7 @@
 	"initializer_range": 0.02,
 	"max_position_embeddings": 512,
 	"n_heads": 4,
-	"n_layers": 4,
+	"n_layers": 2,
 	"sinusoidal_pos_embds": true,
 	"tie_weights_": true,
 	"vocab_size": 30522
