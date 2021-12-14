@@ -532,9 +532,7 @@ class BertEncoder(nn.Module):
         super().__init__()
         self.config = config
 
-        # self.layer = nn.ModuleList([BertLayer(config) for _ in range(config.num_hidden_layers)])
-
-        # I implement layerdrop here. Above is the original code
+        # I implement layerdrop here.
         logger.info('============= Layer Drop =============')
         logger.info('Applying layer drop of {:.1f}'.format(self.config.layerdrop))
         self.layer = LayerDropModuleList(p=self.config.layerdrop,
