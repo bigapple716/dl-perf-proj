@@ -4,19 +4,34 @@ Deep Learning Performance Final Project
 
 Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 
-## Dataset Analysis
+## 1 A Description of the Project and This Repo
 
-- Dataset: WikiText-103
+
+## 2 Dataset
+
+- Dataset name: WikiText-2
 - Link: https://www.salesforce.com/products/einstein/ai-research/the-wikitext-dependency-language-modeling-dataset/
-- Statistics:
-  - Number of Records: 101,880,768 tokens
-  - Data split: 101425671 training tokens, 213886 validation tokens, 241211 test tokens - Size: 181 MB
+- Citation: 
+@misc{merity2016pointer,
+      title={Pointer Sentinel Mixture Models},
+      author={Stephen Merity and Caiming Xiong and James Bradbury and Richard Socher},
+      year={2016},
+      eprint={1609.07843},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+- Stats:
+  - Data split: 
+    - Training set size: 36718
+    - Validation set size: 3760
+    - Test set size: 4358
+  - Size: 13 MB
   - Origin: Raw text from Wikipedia, collected by Salesforce Research
 
-## Frameworks
+## 3 Frameworks
 ### Hugging Face
 - Transformers Doc: https://huggingface.co/docs/transformers/index
-- Hugging Face supports PyTorch & Tensorflow. We use the Tensorflow version, because it runs much faster on Apple M1 Chip.
+- Hugging Face supports PyTorch & Tensorflow. We use the PyTorch version for this project.
 
 #### Model Hub
 - All models: https://huggingface.co/models
@@ -26,12 +41,13 @@ Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 - All datasets: https://huggingface.co/datasets
 - wikitext: https://huggingface.co/datasets/wikitext
 
-## Tokenizers
+## 4 Tokenizers
 We don't re-train tokenizers. Instead, we use the one that comes with BERT and DistilBERT.
 
-## Pre-training the teacher
+## 5 Pre-training the teacher
 - For pre-training, we don't use Next Sentence Prediction, just Masked Language Model.
 
+Run the commands below to pre-train:
 ```shell
 python run_mlm_pt.py \
     --tokenizer_name bert-base-uncased \
@@ -47,8 +63,9 @@ python run_mlm_pt.py \
     --num_train_epochs 1 
 ```
 
-## Distil the student
+## 6 Train the student with Knowledge Distillation
 
+Run the commands below to preprocess data and distil:
 ```shell
 cd ./distillation
 python scripts/binarized_data.py --file_path data/dump.txt --tokenizer_type bert --tokenizer_name bert-base-uncased --dump_file data/binarized_text
@@ -73,3 +90,16 @@ python train.py \
     --token_counts data/token_counts.bert-base-uncased.pickle \
     --force --n_epoch 1 --batch_size 32 --n_gpu 0
 ```
+
+## 7 Results and Observations  
+### Results
+| Role    | Layers | Layer Drop Rate | Train Loss | Eval Loss | Last Loss | Avg Cum Loss |
+|:--------|:-------|:----------------|:-----------|:----------|:----------|:-------------|
+| Teacher | 4      | 0               | 6.6797     | 6.5397    | -         | -            |
+| Teacher | 4      | 0.1             | 6.7317     | 6.5763    | -         | -            |
+| Student | 2      | -               | -          | -         | 19.95     | 20.06        |
+| Student | 2      | -               | -          | -         | 19.77     | 19.88        |
+
+### Observations
+- The intermediate result (teacher's loss) is slightly worse, but the corresponding student can achieve a better result.
+- Our initialization method can help the student converge faster than traditional initialization methods.
