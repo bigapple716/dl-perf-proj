@@ -346,7 +346,6 @@ def main():
         # TODO change config
         config.num_hidden_layers = 4
         config.num_attention_heads = 4
-        # config.hidden_size = 32
         config.layerdrop = 0.1
 
         # model = AutoModelForMaskedLM.from_config(config)
