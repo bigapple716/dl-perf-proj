@@ -5,21 +5,21 @@ Deep Learning Performance Final Project
 Co-author: Minghui Zhang (mz2824), Zhe Wang (zw2695)
 
 ## 1 A Description of the Project and This Repo
+### Repo Description
+This is the repo for the final project of class _COMS 6998 Deep Learning Performance_ at Columbia.
+The repo consists of all the codes and a portion of the data. Please download raw data from the link in Section 2 below. Raw data and trained models are not uploaded because of the storage limit of GitHub. 
 
+### Project Description
+In this project, our goals are compressing BERT without losing much of its performance, and providing a better initial state of student model in order to achieve a faster convergence and a better distillation result. 
+
+Currently, the initialization method of Knowledge Distillation doesn't take future training into account. Our novel initialization method is inspired by the idea of dropout. Firstly, we train the teacher model on raw data while randomly dropping layers for each update of the training phase. In this way, the teacher model is made robust against structural loss. Then, we prune every other layer of the teacher model to create an initial student model. Finally, we perform knowledge distillation by training the student with a distillation loss over the soft target probabilities of the teacher. 
+
+Verified by experiments, our proposed initialization method helps the student model converge faster than traditional initialization methods and achieve a better result.
 
 ## 2 Dataset
 
 - Dataset name: WikiText-2
 - Link: https://www.salesforce.com/products/einstein/ai-research/the-wikitext-dependency-language-modeling-dataset/
-- Citation: 
-@misc{merity2016pointer,
-      title={Pointer Sentinel Mixture Models},
-      author={Stephen Merity and Caiming Xiong and James Bradbury and Richard Socher},
-      year={2016},
-      eprint={1609.07843},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-}
 - Stats:
   - Data split: 
     - Training set size: 36718
@@ -103,3 +103,9 @@ python train.py \
 ### Observations
 - The intermediate result (teacher's loss) is slightly worse, but the corresponding student can achieve a better result.
 - Our initialization method can help the student converge faster than traditional initialization methods.
+
+## 8 References
+- Fan, Angela, Edouard Grave, and Armand Joulin. "Reducing transformer depth on demand with structured dropout." arXiv preprint arXiv:1909.11556 (2019).
+- Devlin, Jacob, et al. "Bert: Pre-training of deep bidirectional transformers for language understanding." arXiv preprint arXiv:1810.04805 (2018).
+- Vaswani, Ashish, et al. "Attention is all you need." Advances in neural information processing systems. 2017.
+- https://huggingface.co/datasets/wikitext#citation-information
