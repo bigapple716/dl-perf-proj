@@ -532,7 +532,7 @@ class BertEncoder(nn.Module):
         super().__init__()
         self.config = config
 
-        # I implement layerdrop here.
+        # I implement LayerDrop here.
         logger.info('============= Layer Drop =============')
         logger.info('Applying layer drop of {:.1f}'.format(self.config.layerdrop))
         self.layer = LayerDropModuleList(p=self.config.layerdrop,
