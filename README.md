@@ -89,7 +89,7 @@ python train.py \
     --teacher_loc ../Models/5/ \
     --alpha_ce 5.0 --alpha_mlm 2.0 --alpha_cos 1.0 --alpha_clm 0.0 --mlm \
     --freeze_pos_embs \
-    --dump_path ../Models/student_5_after_distil/ \
+    --dump_path ../Models/tmp/ \
     --data_file data/binarized_text.bert-base-uncased.pickle \
     --token_counts data/token_counts.bert-base-uncased.pickle \
     --force --n_epoch 1 --batch_size 32 --n_gpu 0
