@@ -33,6 +33,9 @@ Verified by experiments, our proposed initialization method helps the student mo
 - Transformers Doc: https://huggingface.co/docs/transformers/index
 - Hugging Face supports PyTorch & Tensorflow. We use the PyTorch version for this project.
 
+#### Hugging Face Transformers
+It's a Python Library widely used to implement transformer-based models. I forked it into this repo (`local_transformers`) and changed some of its code to implement LayerDrop technique during the teahcer's training.
+
 #### Model Hub
 - All models: https://huggingface.co/models
 - distilbert: https://huggingface.co/distilbert-base-uncased
